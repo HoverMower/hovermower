@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>hovermower</name>
+  <version>0.0.1</version>
+  <description>
+    ROS 2 packages for HoverMower
+  </description>
+  <maintainer email="info@weberpatrick.de">Patrick Weber</maintainer>
+  <license>Apache 2.0</license>
+  <url type="website">https://hovermower.github.io</url>
+  <url type="repository">https://github.com/hovermower</url>
+  
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>hovermower_bringup</exec_depend>
+  <exec_depend>hovermower_description</exec_depend>
+  <exec_depend>hovermower_navigation2</exec_depend>
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
