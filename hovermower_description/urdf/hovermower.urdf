@@ -7,7 +7,7 @@
   <xacro:property name="wheel_radius" value="0.085"/>
   <xacro:property name="base_wheel_gap" value="0.01"/>
   <xacro:property name="wheel_separation" value="0.36"/>
-  <xacro:property name="wheel_joint_offset" value="0"/>
+  <xacro:property name="wheel_joint_offset" value="0.0"/>
   <xacro:property name="caster_wheel_radius" value="0.035"/>
   <xacro:property name="caster_wheel_joint_offset" value="0.12"/>
 
@@ -53,7 +53,7 @@
   <link name="base_link">
     <xacro:box_inertia m="1" w="${base_len}" h="${base_width}" d="0.01"/>
     <visual>
-      <material name="lightgray"/>
+      <material name="blue"/>
       <geometry>
         <mesh filename="package://hovermower_description/meshes/robot_body.dae" />
       </geometry>
@@ -74,9 +74,9 @@
 
 
   <xacro:macro name="wheel" params="prefix reflect rotate">
-    <link name="${prefix}_wheel">
+    <link name="${prefix}_wheel_link">
       <visual>
-        <material name="dark"/>
+        <material name="lightgray"/>
         <geometry>
 	        <mesh filename="package://hovermower_description/meshes/wheel.dae" />
         </geometry>
@@ -88,13 +88,13 @@
     </collision> 
     </link>
 
-    <joint name="${prefix}_wheel" type="continuous">
+    <joint name="${prefix}_wheel" type="fixed">
       <axis xyz="0 1 0" rpy="0 0 0" />
       <parent link="base_link"/>
-      <child link="${prefix}_wheel"/>
+      <child link="${prefix}_wheel_link"/>
       <origin xyz="${wheel_joint_offset} ${((base_width/2)+base_wheel_gap)*reflect} 0" rpy="0 0 ${0+rotate}"/>
     </joint>
-  </xacro:macro>
+ </xacro:macro>
 
   <xacro:wheel prefix="left" reflect="1" rotate="0"/>
   <xacro:wheel prefix="right" reflect="-1" rotate="3.14159"/>
