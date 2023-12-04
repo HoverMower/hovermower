@@ -1,6 +1,7 @@
 import os
 
 from ament_index_python.packages import get_package_share_directory
+from ament_index_python import get_package_prefix
 
 
 from launch import LaunchDescription
@@ -22,6 +23,12 @@ def generate_launch_description():
                     get_package_share_directory(rsp_package_name),'launch','hovermower_state_publisher.launch.py'
                 )]), launch_arguments={'use_sim_time': 'true'}.items()
     )
+
+    pkg_share_path = os.pathsep + os.path.join(get_package_prefix("hovermower_description"), 'share')
+    if 'GAZEBO_MODEL_PATH' in os.environ:
+        os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
+    else:
+        os.environ['GAZEBO_MODEL_PATH'] =  pkg_share_path
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo = IncludeLaunchDescription(

@@ -39,12 +39,11 @@
   </xacro:macro>
 
   <link name="base_footprint">
-    <xacro:box_inertia m="8" w="0.001" h="0.001" d="0.001"/>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <material name="white"/>
         <geometry>
-            <box size="0.001 0.001 0.001" />
+            <box size="0.010 0.010 0.010" />
         </geometry>
     </visual>
   </link> 
@@ -75,6 +74,7 @@
 
   <xacro:macro name="wheel" params="prefix reflect rotate">
     <link name="${prefix}_wheel_link">
+    <xacro:box_inertia m="1" w="0.1" h="${wheel_radius *2 }" d="0.01" />
       <visual>
         <material name="lightgray"/>
         <geometry>
