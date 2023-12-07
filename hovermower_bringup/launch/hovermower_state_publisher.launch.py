@@ -31,16 +31,18 @@ def generate_launch_description():
 
     # print (robot_desc) # Printing urdf information.
 
+    robot_state_publisher = Node(
+        package='robot_state_publisher',
+        executable='robot_state_publisher',
+        output='screen',
+        parameters=[{'use_sim_time': use_sim_time,
+                     'robot_description': Command(['xacro ',' ', urdf ])
+        }])
+    
     return LaunchDescription([
         DeclareLaunchArgument(
             'use_sim_time',
             default_value='false',
             description='Use simulation (Gazebo) clock if true'),
-        Node(
-            package='robot_state_publisher',
-            executable='robot_state_publisher',
-            output='screen',
-            parameters=[{'use_sim_time': use_sim_time,
-                         'robot_description': Command(['xacro ',' ', urdf ])
-            }])
+            robot_state_publisher
      ] )
