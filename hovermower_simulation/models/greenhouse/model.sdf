@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="greenhouse">
+    <static>true</static>
+    <link name="greenhouse_link">
+        <collision name="greenhouse_collision">  
+         <geometry>
+            <box>
+                <size>1.70 0.51 0.55</size>
+            </box>
+        </geometry>
+      </collision>
+      
+      <visual name="greenhouse_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://greenhouse/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

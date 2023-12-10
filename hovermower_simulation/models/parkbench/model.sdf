@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="park_bench">
+    <static>true</static>
+    <link name="bench_link">
+        <collision name="bench_collision">  
+         <geometry>
+            <mesh>
+              <uri>model://parkbench/meshes/model.dae</uri>
+            </mesh>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </geometry>
+      </collision>
+      
+      <visual name="bench_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://parkbench/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

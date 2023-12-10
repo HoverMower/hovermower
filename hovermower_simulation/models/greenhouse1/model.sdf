@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="greenhouse1">
+    <static>true</static>
+    <link name="greenhouse_link">
+        <collision name="greenhouse_collision">  
+         <geometry>
+                     <mesh>
+                <uri>model://greenhouse1/meshes/model.dae</uri>
+            </mesh>
+      <!--      <box>
+                <size>6 4 3</size>
+            </box> -->
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </geometry>
+      </collision>
+      
+      <visual name="greenhouse_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://greenhouse1/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>

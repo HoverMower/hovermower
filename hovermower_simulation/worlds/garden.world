@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <world name="garden">
+    <include> <!-- Add in a light source -->
+      <uri>model://sun</uri>
+    </include>
+
+    <include> 
+      <uri>model://house</uri>
+      <name>House</name>
+      <pose>0 0 0 0 0 0</pose>
+    </include>    
+
+    <include> 
+      <uri>model://parkbench</uri>
+      <name>Bench</name>
+      <pose>0 5 0 0 0 -1.57</pose>
+    </include>
+
+    <include> 
+      <uri>model://swing_slide</uri>
+      <name>Swing</name>
+      <pose>-6 5 0 0 0 -1.57</pose>
+    </include>
+
+    <include> 
+      <uri>model://greenhouse1</uri>
+      <name>Greenhouse</name>
+      <pose>-10 0 0 0 0</pose>
+    </include>
+
+    <include> 
+      <uri>model://barrel</uri>
+      <name>barrel</name>
+      <pose>-9.5 4.7 0 0 0 0</pose>
+    </include>
+
+    <include> 
+      <uri>model://compost_bin</uri>
+      <name>compost_bin</name>
+      <pose>-10 5.2 0 0 0 0</pose>
+    </include>
+
+    <include> 
+      <uri>model://raised_bed</uri>
+      <name>raised_bed</name>
+      <pose>-10 6.15 0 0 0 0</pose>
+    </include>
+
+  </world>
+</sdf>

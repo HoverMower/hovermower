@@ -25,11 +25,20 @@ def generate_launch_description():
     )
 
     # Fix model path for Gazebo
-    pkg_share_path = os.pathsep + os.path.join(get_package_prefix("hovermower_description"), 'share')
+    robot_share_path = os.pathsep + os.path.join(get_package_prefix("hovermower_description"), 'share')
     if 'GAZEBO_MODEL_PATH' in os.environ:
-        os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
+        os.environ['GAZEBO_MODEL_PATH'] += robot_share_path
     else:
-        os.environ['GAZEBO_MODEL_PATH'] =  pkg_share_path
+        os.environ['GAZEBO_MODEL_PATH'] =  robot_share_path
+
+    # Set the path to the world file
+    world_file_name = 'garden.world'
+    world_path = os.path.join(pkg_share_path, 'worlds', world_file_name)
+   
+    # Set the path to the SDF model files.
+    gazebo_models_path = os.path.join(pkg_share_path, 'models')
+    os.environ["GAZEBO_MODEL_PATH"] = gazebo_models_path
+
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo = IncludeLaunchDescription(

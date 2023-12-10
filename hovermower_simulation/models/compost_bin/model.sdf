@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="compost_bin">
+    <static>true</static>
+    <link name="compost_link">
+        <collision name="compost_collision">  
+         <geometry>
+            <mesh>
+              <uri>model://compost_bin/meshes/model.dae</uri>
+            </mesh>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+        </geometry>
+      </collision>
+      
+      <visual name="compost_mesh">
+        <cast_shadows>true</cast_shadows>
+        <geometry>
+            <mesh>
+                <uri>model://compost_bin/meshes/model.dae</uri>
+            </mesh>
+        </geometry>
+      </visual>
+    </link>
+  </model>
+</sdf>
