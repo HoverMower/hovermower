@@ -17,12 +17,7 @@
       <pose>0 5 0 0 0 -1.57</pose>
     </include>
 
-    <include> 
-      <uri>model://swing_slide</uri>
-      <name>Swing</name>
-      <pose>-6 5 0 0 0 -1.57</pose>
-    </include>
-
+ 
     <include> 
       <uri>model://greenhouse1</uri>
       <name>Greenhouse</name>
