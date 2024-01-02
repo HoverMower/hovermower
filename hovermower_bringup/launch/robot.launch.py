@@ -13,9 +13,6 @@ from launch_ros.actions import Node
 
 
 def generate_launch_description():
-#    LDS_LAUNCH_FILE = '/hlds_laser.launch.py'
-
-#    usb_port = LaunchConfiguration('usb_port', default='/dev/ttyACM0')
 
     hm_param_dir = LaunchConfiguration(
         'hm_param_dir',
@@ -24,10 +21,6 @@ def generate_launch_description():
             'param',
             'hovermower.yaml'))
 
-#        lidar_pkg_dir = LaunchConfiguration(
-#            'lidar_pkg_dir',
-#            default=os.path.join(get_package_share_directory('hls_lfcd_lds_driver'), 'launch'))
-
     use_sim_time = LaunchConfiguration('use_sim_time', default='false')
 
     return LaunchDescription([
@@ -35,11 +28,6 @@ def generate_launch_description():
             'use_sim_time',
             default_value=use_sim_time,
             description='Use simulation (Gazebo) clock if true'),
-
-#        DeclareLaunchArgument(
-#            'usb_port',
-#            default_value=usb_port,
-#            description='Connected USB port with OpenCR'),
 
         DeclareLaunchArgument(
             'hm_param_dir',
@@ -52,15 +40,4 @@ def generate_launch_description():
             launch_arguments={'use_sim_time': use_sim_time}.items(),
         ),
 
-   #     IncludeLaunchDescription(
-   #         PythonLaunchDescriptionSource([lidar_pkg_dir, LDS_LAUNCH_FILE]),
-   #         launch_arguments={'port': '/dev/ttyUSB0', 'frame_id': 'base_scan'}.items(),
-   #     ),
-
-       # Node(
-           # package='turtlebot3_node',
-           # executable='turtlebot3_ros',
-           # parameters=[tb3_param_dir],
-           # arguments=['-i', usb_port],
-           # output='screen'),
     ])

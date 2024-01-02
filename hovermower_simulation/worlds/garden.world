@@ -5,6 +5,11 @@
       <uri>model://sun</uri>
     </include>
 
+		<!-- A ground plane -->
+		<include>
+			<uri>model://ground_plane</uri>
+		</include>
+
     <include> 
       <uri>model://house</uri>
       <name>House</name>
@@ -29,13 +34,13 @@
       <name>barrel</name>
       <pose>-9.5 4.7 0 0 0 0</pose>
     </include>
-
+<!--
     <include> 
       <uri>model://compost_bin</uri>
       <name>compost_bin</name>
       <pose>-10 5.2 0 0 0 0</pose>
     </include>
-
+-->
     <include> 
       <uri>model://raised_bed</uri>
       <name>raised_bed</name>

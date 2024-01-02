@@ -39,10 +39,10 @@ def generate_launch_description():
    
     # Launch them all!
     return LaunchDescription([
-        gazebo,
         DeclareLaunchArgument(
         'world',
-        default_value=[os.path.join(pkg_gazebo, 'worlds', 'garden.world'), ''],
+        default_value=[os.path.join(pkg_gazebo, 'worlds', 'garden_world.world'), ''],
         description='SDF world file',
-        )
+        ),
+        gazebo,
     ])

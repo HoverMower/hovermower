@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- HoverMower elementary controls-->
+  <node name="hovermower_base" pkg="hovermower_base" exec="hovermower_base" output="screen">
+    <param from="$(find-pkg-share hovermower_base)/conf/safety_controller.yaml" />
+  </node>
+
+</launch>
