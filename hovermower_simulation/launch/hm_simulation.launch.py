@@ -8,6 +8,7 @@ from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument
 from launch.actions import IncludeLaunchDescription
 from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_xml.launch_description_sources import XMLLaunchDescriptionSource
 
 from launch_ros.actions import Node
 
@@ -15,9 +16,12 @@ def generate_launch_description():
 
     # Set the path to the world file
     world_file_name = 'garden.world'
+    #world_file_name = 'turtlebot3_world.world'
+    #world_file_name = 'lawn.world'
 
     rsp_package_name='hovermower_bringup'
     pkg_share_path = get_package_share_directory('hovermower_simulation')
+    #pkg_share_path = get_package_share_directory('turtlebot3_gazebo')
 
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
@@ -57,6 +61,14 @@ def generate_launch_description():
         parameters=[{'use_sim_time': True
         }])
 
+    # PS4 joystick controller
+    ds4_joy = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource(
+                [os.path.join(
+                    get_package_share_directory('hovermower_bringup'), 'launch', 'joystick.launch.py')]) ,
+            launch_arguments={'use_sim_time': 'true'}.items(),
+    )
+   
     twist_mux_params = os.path.join(get_package_share_directory(rsp_package_name),'config','twist_mux.yaml')
     twist_mux = Node(
             package="twist_mux",
@@ -76,5 +88,6 @@ def generate_launch_description():
         joint_state_publisher, 
         spawn_entity,
         twist_mux,
-        gazebo
+        gazebo,
+        ds4_joy
     ])

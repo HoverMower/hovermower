@@ -32,12 +32,18 @@ def generate_launch_description():
          )
 
     # PS4 joystick controller
+    #ds4_joy = IncludeLaunchDescription(
+    #            XMLLaunchDescriptionSource([os.path.join(
+    #                get_package_share_directory('ds4_driver'),'launch','ds4_twist.launch.xml'
+    #            )]), launch_arguments={'use_sim_time': use_sim_time,
+    #                                   'dof': '2' }.items()           
+    #            )
+
     ds4_joy = IncludeLaunchDescription(
-                XMLLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('ds4_driver'),'launch','ds4_twist.launch.xml'
-                )]), launch_arguments={'use_sim_time': use_sim_time,
-                                       'dof': '2' }.items()           
-                )
+            PythonLaunchDescriptionSource(
+                [ThisLaunchFileDir(), '/joystick.launch.py']),
+            launch_arguments={'use_sim_time': use_sim_time}.items(),
+    )
 
     # twist mux to handle concurrend cmd_vel topics
     twist_mux_params = os.path.join(get_package_share_directory('hovermower_bringup'),'config','twist_mux.yaml')
