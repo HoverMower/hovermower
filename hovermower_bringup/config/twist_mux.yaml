@@ -5,6 +5,10 @@ twist_mux:
         topic   : cmd_vel_nav
         timeout : 0.5
         priority: 10
+      safety_controller:
+        topic   : cmd_vel_safety
+        timeout : 0.5
+        priority: 15        
       keyboard:
         topic   : cmd_vel_key
         timeout : 0.5
@@ -13,3 +17,8 @@ twist_mux:
         topic   : cmd_vel_joy
         timeout : 0.5
         priority: 100
+    locks:
+        name    : e_stop
+        topic   : /e_stop
+        timeout : 0.0
+        priority: 110

@@ -39,17 +39,17 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
       <material name="white"/>
-        <geometry>
-            <box size="0.010 0.010 0.010" />
-        </geometry>
+      <geometry>
+        <box size="0.010 0.010 0.010" />
+      </geometry>
     </visual>
-  </link> 
+  </link>
 
- 
+
   <link name="base_link">
     <xacro:inertial_box mass="8" x="${base_len}" y="${base_width}" z="${base_height}">
-            <origin xyz="${base_len/2} 0 ${base_height/2}" rpy="0 0 0"/>
-     </xacro:inertial_box>
+      <origin xyz="${base_len/2} 0 0" rpy="0 0 0"/>
+    </xacro:inertial_box>
     <visual>
       <material name="blue"/>
       <geometry>
@@ -63,7 +63,7 @@
     </collision>
   </link>
 
- 
+
   <joint name="base_link_joint" type="fixed">
     <origin xyz="0 0 0.08" rpy="0 0 0" />
     <parent link="base_footprint"/>
@@ -74,19 +74,19 @@
   <xacro:macro name="wheel" params="prefix reflect rotate">
     <link name="${prefix}_wheel_link">
       <xacro:inertial_cylinder mass="1" length="${wheel_thickness}" radius="${wheel_radius}">
-          <origin xyz="0 0 0" rpy="0 0 0"/>
+        <origin xyz="0 0 0" rpy="0 0 ${0+rotate}"/>
       </xacro:inertial_cylinder>
       <visual>
         <material name="black"/>
         <geometry>
-	        <mesh filename="package://hovermower_description/meshes/wheel.dae" />
+          <mesh filename="package://hovermower_description/meshes/wheel.dae" />
         </geometry>
-    </visual>
-    <collision>
-      <geometry>
-        <mesh filename="package://hovermower_description/meshes/wheel.dae" />
-      </geometry>
-    </collision> 
+      </visual>
+      <collision>
+        <geometry>
+          <mesh filename="package://hovermower_description/meshes/wheel.dae" />
+        </geometry>
+      </collision>
     </link>
 
     <joint name="${prefix}_wheel_joint" type="continuous">
@@ -95,41 +95,41 @@
       <child link="${prefix}_wheel_link"/>
       <origin xyz="${wheel_joint_offset} ${((base_width/2)+base_wheel_gap)*reflect} 0" rpy="0 0 ${0+rotate}"/>
     </joint>
- </xacro:macro>
+  </xacro:macro>
 
   <xacro:wheel prefix="left" reflect="1" rotate="0"/>
   <xacro:wheel prefix="right" reflect="-1" rotate="3.14159"/>
 
-    <!-- CASTER WHEEL LINK -->
+  <!-- CASTER WHEEL LINK -->
 
-    <joint name="caster_wheel_joint" type="fixed">
-        <parent link="base_link"/>
-        <child link="caster_wheel"/>
-        <origin xyz="${caster_wheel_joint_offset_x} ${caster_wheel_joint_offset_y} ${caster_wheel_joint_offset_z}"/>
-    </joint>
+  <joint name="caster_wheel_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster_wheel"/>
+    <origin xyz="${caster_wheel_joint_offset_x} ${caster_wheel_joint_offset_y} ${caster_wheel_joint_offset_z}"/>
+  </joint>
 
 
-    <link name="caster_wheel">
-        <visual>
-            <geometry>
-                <sphere radius="${caster_wheel_radius}"/>
-            </geometry>
-            <material name="white"/>
-        </visual>
-        <collision>
-            <geometry>
-                <sphere radius="${caster_wheel_radius}"/>
-            </geometry>
-        </collision>
-        <xacro:inertial_sphere mass="0.1" radius="${caster_wheel_radius}">
-            <origin xyz="0 0 0" rpy="0 0 0"/>
-        </xacro:inertial_sphere>
-    </link>
+  <link name="caster_wheel">
+    <visual>
+      <geometry>
+        <sphere radius="${caster_wheel_radius}"/>
+      </geometry>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="${caster_wheel_radius}"/>
+      </geometry>
+    </collision>
+    <xacro:inertial_sphere mass="0.1" radius="${caster_wheel_radius}">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_sphere>
+  </link>
 
   <joint name="imu_joint" type="fixed">
     <parent link="base_link" />
     <child link="imu" />
-    <origin xyz="0.092 0.0 0.105" rpy="0 0 0" /> 
+    <origin xyz="0.092 0.0 0.105" rpy="0 0 0" />
   </joint>
   <link name="imu" />
 
@@ -138,49 +138,77 @@
     <child link="lidar_frame" />
     <origin xyz="0.242 0.0 0.195" rpy="0 0 0" />
   </joint>
-  <link name="lidar_frame" type="fixed"/>
+  <link name="lidar_frame" type="fixed">
+    <xacro:inertial_cylinder mass="0.1" length="0.08" radius="0.08">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
 
   <joint name="gps_joint" type="fixed">
     <parent link="base_link" />
     <child link="gps_frame" />
     <origin xyz="0.0 0.118 0.202" rpy="0 0 0" />
   </joint>
-  <link name="gps_frame" type="fixed"/>
+  <link name="gps_frame" type="fixed">
+    <xacro:inertial_cylinder mass="0.1" length="0.08" radius="0.08">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
 
   <joint name="camera_joint" type="fixed">
     <origin xyz="0.35 0 0.117" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="camera_link" />
   </joint>
-  <link name="camera_link" type="fixed"/>
-  
+  <link name="camera_link" type="fixed">
+    <xacro:inertial_cylinder mass="0.1" length="0.08" radius="0.08">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
+
   <joint name="perimeter_left_joint" type="fixed">
     <origin xyz="0.385 0.081 0.025" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="perimeter_left" />
   </joint>
-  <link name="perimeter_left" type="fixed"/>
-  
+  <link name="perimeter_left" type="fixed">
+    <xacro:inertial_cylinder mass="0.02" length="0.01" radius="0.01">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
+
   <joint name="perimeter_right_joint" type="fixed">
     <origin xyz="0.385 -0.081 0.025" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="perimeter_right" />
   </joint>
-  <link name="perimeter_right" type="fixed"/>  
+  <link name="perimeter_right" type="fixed">
+    <xacro:inertial_cylinder mass="0.02" length="0.01" radius="0.01">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
 
   <joint name="bumper_left_joint" type="fixed">
     <origin xyz="0.45 0.101 0.040" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="bumper_left" />
   </joint>
-  <link name="bumper_left" type="fixed"/>
+  <link name="bumper_left" type="fixed">
+    <xacro:inertial_cylinder mass="0.02" length="0.01" radius="0.01">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
 
   <joint name="bumper_right_joint" type="fixed">
     <origin xyz="0.45 -0.101 0.040" rpy="0 0 0" />
     <parent link="base_link" />
     <child link="bumper_right" />
   </joint>
-  <link name="bumper_right" type="fixed"/>
+  <link name="bumper_right" type="fixed">
+    <xacro:inertial_cylinder mass="0.02" length="0.01" radius="0.01">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:inertial_cylinder>
+  </link>
 
   <xacro:include filename="$(find hovermower_simulation)/urdf/gazebo_control.xacro" />
 

@@ -15,7 +15,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
     # Set the path to the world file
-    world_file_name = 'garden.world'
+    world_file_name = 'garden_world.world'
     #world_file_name = 'turtlebot3_world.world'
     #world_file_name = 'lawn.world'
 

@@ -28,10 +28,10 @@ void HoverMower_joystick::joyCallback(const std::shared_ptr<sensor_msgs::msg::Jo
 {
     // e_stop
     // Ensures not to toggle for each incoming message, when button keeps pressed
-    if (msg->buttons[buttons::LB] > 0 && msg->buttons[buttons::LB] != last_button_l1)
+    if (msg->buttons[buttons::PS] > 0 && msg->buttons[buttons::PS] != last_button_ps)
     {
         _e_stop = !_e_stop;
-        last_button_l1 = msg->buttons[buttons::LB];
+        last_button_ps = msg->buttons[buttons::PS];
 
         std_msgs::msg::Bool msg_estop;
         msg_estop.data = _e_stop;
@@ -39,29 +39,29 @@ void HoverMower_joystick::joyCallback(const std::shared_ptr<sensor_msgs::msg::Jo
         // ros::spinOnce();
     }
     // reset if button has been released
-    if (msg->buttons[buttons::LB] == 0)
+    if (msg->buttons[buttons::PS] == 0)
     {
-        last_button_l1 = 0;
+        last_button_ps = 0;
     }
 
     // enable Hoverboard PCB
-    if (msg->buttons[buttons::RB] > 0 && msg->buttons[buttons::RB] != last_button_r1)
+    if (msg->buttons[buttons::options] > 0 && msg->buttons[buttons::options] != last_button_options)
     {
-        last_button_r1 = msg->buttons[buttons::RB];
+        last_button_options = msg->buttons[buttons::options];
         auto srv = std::make_shared<rosmower_msgs::srv::PressSwitch::Request>();
         srv->switch_id = 3;
         _srv_pressSwitch->async_send_request(srv);
     }
     // reset if button has been released
-    if (msg->buttons[buttons::RB] == 0)
+    if (msg->buttons[buttons::options] == 0)
     {
-        last_button_r1 = 0;
+        last_button_options = 0;
     }
 
     // mow motor speed
-    if (msg->buttons[buttons::LT] > 0 && msg->buttons[buttons::LT] != last_button_l2)
+    if (msg->buttons[buttons::share] > 0 && msg->buttons[buttons::share] != last_button_share)
     {
-        last_button_l2 = msg->buttons[buttons::LT];
+        last_button_share = msg->buttons[buttons::share];
         auto srv = std::make_shared<rosmower_msgs::srv::SetMowMotor::Request>();
         if (_mow_speed == 0)
         {
@@ -74,9 +74,9 @@ void HoverMower_joystick::joyCallback(const std::shared_ptr<sensor_msgs::msg::Jo
         _srv_mow->async_send_request(srv);
     }
     // reset if button has been released
-    if (msg->buttons[buttons::LT] == 0)
+    if (msg->buttons[buttons::share] == 0)
     {
-        last_button_l2 = 0;
+        last_button_share = 0;
     }
 }
 

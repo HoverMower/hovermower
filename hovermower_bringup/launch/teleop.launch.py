@@ -39,7 +39,7 @@ def generate_launch_description():
     #                                   'dof': '2' }.items()           
     #            )
 
-    ds4_joy = IncludeLaunchDescription(
+    joy = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [ThisLaunchFileDir(), '/joystick.launch.py']),
             launch_arguments={'use_sim_time': use_sim_time}.items(),
@@ -104,8 +104,8 @@ def generate_launch_description():
             default_value='false',
             description='Use sim time if true'),
         robot,
-        teleop_node,
-        ds4_joy,
+        #teleop_node,
+        joy,
         twist_mux,
         hoverboard,
         hovermower_base_controller,

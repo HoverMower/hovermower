@@ -9,7 +9,7 @@ HoverMower_SafetyController::HoverMower_SafetyController(std::string name) : Nod
     sub_perimeter = create_subscription<rosmower_msgs::msg::Perimeter>("hovermower/sensors/Perimeter", 1000, std::bind(&HoverMower_SafetyController::perimeterCallback, this, std::placeholders::_1));
     sub_bumper_left = create_subscription<std_msgs::msg::Bool>("hovermower/sensors/bumper/left", 1000, std::bind(&HoverMower_SafetyController::bumperleftCallback, this, std::placeholders::_1));
     sub_bumper_left = create_subscription<std_msgs::msg::Bool>("hovermower/sensors/bumper/right", 1000, std::bind(&HoverMower_SafetyController::bumperrightCallback, this, std::placeholders::_1));
-    cmd_vel_bumper = create_publisher<geometry_msgs::msg::Twist>("/safety_bump_vel", 1000);
+    cmd_vel_bumper = create_publisher<geometry_msgs::msg::Twist>("/cmd_vel_safety", 1000);
 
     // declare parameter
     declare_parameter("allow_unstuck_bumper", true);

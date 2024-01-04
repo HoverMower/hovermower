@@ -26,6 +26,7 @@ public:
     void mowCallback(const std::shared_ptr<rosmower_msgs::msg::MowMotor> msg);
     void switchesCallback(const std::shared_ptr<rosmower_msgs::msg::Switches> msg);
 
+/* valid values for DS4 joy message
     enum buttons : int
     {
         square = 0,
@@ -46,6 +47,26 @@ public:
         up = 15,
         right = 16,
         down = 17
+    }; */
+
+    enum buttons : int
+    {
+        square = 2,
+        triangle = 3,
+        star = 1,
+        cross = 0,
+        LB = 9,
+        RB = 10,
+        share = 4,
+        options = 6,
+        PS = 5,
+        touch = 15,
+        left_click = 7,
+        right_click = 8,
+        left = 13,
+        up = 11,
+        right = 14,
+        down = 12
     };
 
 private:
@@ -67,9 +88,9 @@ private:
     int _mow_speed;
 
     // keep last button state to not toggle too often (debounce)
-    int last_button_l1 = 0;
-    int last_button_l2 = 0;
-    int last_button_r1 = 0;
+    int last_button_options = 0;
+    int last_button_share = 0;
+    int last_button_ps = 0;
     int last_button_circle = 0;
     int last_button_square = 0;
     int last_button_triangle = 0;
