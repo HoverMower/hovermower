@@ -1,24 +1,24 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-  <xacro:property name="wheel_radius" value="0.085"/>
-  <xacro:property name="wheel_separation" value="0.36"/>
+    <xacro:property name="wheel_radius" value="0.085"/>
+    <xacro:property name="wheel_separation" value="0.36"/>
 
     <gazebo>
         <plugin name='diff_drive' filename='libgazebo_ros_diff_drive.so'>
-    
-    
+
+
             <!-- Wheel Information -->
             <left_joint>left_wheel_joint</left_joint>
             <right_joint>right_wheel_joint</right_joint>
             <wheel_separation>${wheel_separation}</wheel_separation>
             <wheel_diameter>${wheel_radius * 2}</wheel_diameter>
-    
+
 
             <!-- Limits -->
             <max_wheel_torque>3</max_wheel_torque>
             <max_wheel_acceleration>1.0</max_wheel_acceleration>
-    
+
 
             <!-- Output -->
             <odometry_frame>odom</odometry_frame>
@@ -27,8 +27,8 @@
             <publish_odom>true</publish_odom>
             <publish_odom_tf>true</publish_odom_tf>
             <publish_wheel_tf>true</publish_wheel_tf>
-    
-    
+
+
         </plugin>
     </gazebo>
 
@@ -44,9 +44,10 @@
         <material>Gazebo/Black</material>
     </gazebo>
 
+    <!-- Lidar -->
     <gazebo reference="lidar_frame">
         <material>Gazebo/Red</material>
- 
+
         <sensor name="lidar" type="ray">
             <pose> 0 0 0 0 0 0 </pose>
             <visualize>false</visualize>
@@ -73,29 +74,50 @@
             </plugin>
         </sensor>
     </gazebo>
- 
-   <gazebo reference="imu">
-    <gravity>true</gravity>
-    <sensor name="imu_sensor" type="imu">
-      <always_on>true</always_on>
-      <update_rate>20</update_rate>
-      <visualize>true</visualize>
-      <topic>raw</topic>
-      <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
-        <topicName>imu</topicName>
-        <bodyName>imu</bodyName>
-        <updateRateHZ>10.0</updateRateHZ>
-        <gaussianNoise>0.0</gaussianNoise>
-        <xyzOffset>0 0 0</xyzOffset>
-        <rpyOffset>0 0 0</rpyOffset>
-        <frameName>imu_frame</frameName>
-        <initialOrientationAsReference>false</initialOrientationAsReference>
-      </plugin>
-      <pose>0 0 0 0 0 0</pose>
-    </sensor>
-  </gazebo>
 
+    <!-- IMU-->
+    <gazebo reference="imu">
+        <gravity>true</gravity>
+        <sensor name="imu_sensor" type="imu">
+            <always_on>true</always_on>
+            <update_rate>20</update_rate>
+            <visualize>true</visualize>
+            <topic>raw</topic>
+            <plugin filename="libgazebo_ros_imu_sensor.so" name="imu_plugin">
+                <topicName>imu</topicName>  
+                <bodyName>imu</bodyName>
+                <updateRateHZ>10.0</updateRateHZ>
+                <gaussianNoise>0.0</gaussianNoise>
+                <xyzOffset>0 0 0</xyzOffset>
+                <rpyOffset>0 0 0</rpyOffset>
+                <frameName>imu_frame</frameName>
+                <initialOrientationAsReference>false</initialOrientationAsReference>
+            </plugin>
+            <pose>0 0 0 0 0 0</pose>
+        </sensor>
+    </gazebo>
 
+    <!-- GPS -->
+    <gazebo>
+        <plugin name="gazebo_ros_gps" filename="libhector_gazebo_ros_gps.so">
+            <alwaysOn>true</alwaysOn>
+            <updateRate>5.0</updateRate>
+            <bodyName>gps_frame</bodyName>
+            <frameId>gps_frame</frameId>
+            <topicName>/fix</topicName>
+            <velocityTopicName>/fix_velocity</velocityTopicName>
+            <referenceLatitude>50.2200104</referenceLatitude>
+            <referenceLongitude>6.6534527</referenceLongitude>
+            <referenceHeading>10</referenceHeading>
+            <referenceAltitude>450</referenceAltitude>
+            <offset>0 0 0</offset>
+            <drift>0 0 0</drift>
+            <gaussianNoise>0.05 0.05 0.05</gaussianNoise>
+            <velocityDrift>0.00001 0.00001 0.00001</velocityDrift>
+            <velocityGaussianNoise>0.05 0.05 0.05</velocityGaussianNoise>
+        </plugin>
+    </gazebo> 
+    <!-- caster wheel no friction so robot can move-->
     <gazebo reference="caster_wheel">
         <material>Gazebo/Black</material>
         <mu1 value="0.001"/>
