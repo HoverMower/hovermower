@@ -62,7 +62,7 @@ def generate_launch_description():
         }])
 
     # PS4 joystick controller
-    ds4_joy = IncludeLaunchDescription(
+    joy = IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [os.path.join(
                     get_package_share_directory('hovermower_bringup'), 'launch', 'joystick.launch.py')]) ,
@@ -89,5 +89,5 @@ def generate_launch_description():
         spawn_entity,
         twist_mux,
         gazebo,
-        ds4_joy
+        joy
     ])
