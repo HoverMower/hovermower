@@ -22,5 +22,6 @@ ublox_gps_node:
       all: true
       aid:
         hui: false
+        all: false
       nav:
         posecef: false

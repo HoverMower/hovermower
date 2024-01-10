@@ -1,0 +1,26 @@
+ntrip_client:
+  ros__parameters:
+    host: 192.168.178.37  
+    port: 2101
+    mountpoint: Pelm01
+    authenticate: true
+    username: rtk
+    password: rtk_base
+    ssl : false
+    #cert:
+    #key:
+    #ca_cert:
+    # Not sure if this will be looked at by other ndoes, but this frame ID will be added to the RTCM messages published by this node
+    #rtcm_frame_id: odom
+    # Optional parameters that will allow for longer or shorter NMEA messages. Standard max length for NMEA is 82
+    nmea_max_length: 82
+    nmea_min_length: 3
+    # Use this parameter to change the type of RTCM message published by the node. Defaults to "mavros_msgs", but we also support "rtcm_msgs"
+    rtcm_message_package: rtcm_msgs
+    # Will affect how many times the node will attempt to reconnect before exiting, and how long it will wait in between attempts when a reconnect occurs
+    reconnect_attempt_max: 10
+    reconnect_attempt_wait_seconds: 5
+    # How many seconds is acceptable in between receiving RTCM. If RTCM is not received for this duration, the node will attempt to reconnect
+    rtcm_timeout_seconds: 4
+      
+
